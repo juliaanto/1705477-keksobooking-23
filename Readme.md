@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг»
 
 * Студент: [Юлия Антонова](https://up.htmlacademy.ru/javascript/23/user/1705477).
-* Наставник: `Неизвестно`.
+* Наставник: [Антон Попов](https://htmlacademy.ru/profile/joker).
 
 ---
 
