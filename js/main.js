@@ -102,27 +102,14 @@ const createAutor = () => {
 };
 
 /**
- * Создает местоположение в виде географических координат
- *
- * @return {*}
- */
-const createLocation = () => {
-  const location = {
-    lat: getRandomDecimal(35.65000, 35.70000, 5),
-    lng: getRandomDecimal(139.70000, 139.80000, 5),
-  };
-  return location;
-};
-
-/**
  * Создает предложение (которое содержит информацию об объявлении)
  *
  * @return {*}
  */
-const createOffer = () => {
+const createOffer = (addressX, addressY) => {
   const offer = {
     title: 'Отель Duquesne Eiffel',
-    address: Object.values(createLocation()).join(', '),
+    address: `${addressX}, ${addressY}`,
     price: getRandomNumber(1000, 100000),
     type: getRandomArrayElement(TYPES),
     rooms: getRandomNumber(1, 20),
@@ -142,10 +129,15 @@ const createOffer = () => {
  * @return {*}
  */
 const createAnnouncement = () => {
+  const lat = getRandomDecimal(35.65000, 35.70000, 5);
+  const lng = getRandomDecimal(139.70000, 139.80000, 5);
   const announcement = {
     author: createAutor(),
-    offer: createOffer(),
-    location: createLocation(),
+    offer: createOffer(lat, lng),
+    location: {
+      lat: lat,
+      lng: lng,
+    },
   };
   return announcement;
 };
