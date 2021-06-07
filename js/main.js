@@ -52,7 +52,7 @@ function getRandomDecimal (min, max, digits) {
  * @param {number} max - конец диапазона
  * @return {number}
  */
-function getRandomNumber (min, max) {
+function getRandomNumber(min, max) {
   return getRandomDecimal(min, max, 0);
 }
 
@@ -62,7 +62,9 @@ function getRandomNumber (min, max) {
  * @param {object} elements - массив
  * @return {string}
  */
-const getRandomArrayElement = (elements) => elements[getRandomNumber(0, elements.length - 1)];
+function getRandomElementFromArray(elements) {
+  return elements[getRandomNumber(0, elements.length - 1)];
+}
 
 /**
  * Создает массив случайной длины на основе переданного массива
@@ -70,7 +72,7 @@ const getRandomArrayElement = (elements) => elements[getRandomNumber(0, elements
  * @param {object} array - исходный массив
  * @return {object}
  */
-const getRandomArray = (array) => {
+function getRandomArray(array) {
 
   const currentArray = [];
   const elementsCount = getRandomNumber(1,[array.length]);
@@ -88,48 +90,48 @@ const getRandomArray = (array) => {
     }
   }
   return currentArray;
-};
+}
 
 /**
  * Создает автора
  *
  * @return {object}
  */
-const createAutor = () => {
+function createAutor() {
   const author = {
     avatar: `img/avatars/user0${getRandomNumber(1,8)}.png`,
   };
   return author;
-};
+}
 
 /**
  * Создает предложение (которое содержит информацию об объявлении)
  *
  * @return {object}
  */
-const createOffer = (addressX, addressY) => {
+function createOffer(addressX, addressY) {
   const offer = {
     title: 'Отель Duquesne Eiffel',
     address: `${addressX}, ${addressY}`,
     price: getRandomNumber(1000, 100000),
-    type: getRandomArrayElement(TYPES),
+    type: getRandomElementFromArray(TYPES),
     rooms: getRandomNumber(1, 20),
     guests: getRandomNumber(1, 20),
-    checkin: getRandomArrayElement(TIMES),
-    checkout: getRandomArrayElement(TIMES),
+    checkin: getRandomElementFromArray(TIMES),
+    checkout: getRandomElementFromArray(TIMES),
     features: getRandomArray(FEATURES),
     description: 'Отель Duquesne Eiffel расположен в Париже, всего в 5 минутах ходьбы от парка Марсово поле. В отеле есть звукоизолированные номера с бесплатным Wi-Fi, а из окон некоторых номеров открывается вид на Эйфелеву башню.',
     photos: getRandomArray(PHOTOS),
   };
   return offer;
-};
+}
 
 /**
  *  Создает объявление
  *
  * @return {object}
  */
-const createAnnouncement = () => {
+function createAnnouncement() {
   const lat = getRandomDecimal(35.65000, 35.70000, 5);
   const lng = getRandomDecimal(139.70000, 139.80000, 5);
   const announcement = {
@@ -141,7 +143,7 @@ const createAnnouncement = () => {
     },
   };
   return announcement;
-};
+}
 
 const similarAnnouncements = new Array(SIMILAR_ANNOUNCEMENTS).fill(null).map(() => createAnnouncement());
 similarAnnouncements();
