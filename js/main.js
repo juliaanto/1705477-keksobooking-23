@@ -75,10 +75,10 @@ const getRandomArray = (array) => {
   const elementsCount = getRandomNumber(1,[array.length]);
 
   for (let currentElement = 0; currentElement < elementsCount - 1; currentElement++) {
-    const isActiveNumber = getRandomNumber(0,1);
+    const activeNumber = Number(getRandomNumber(0,1));
     let isActive = false;
 
-    if (isActiveNumber === '1') {
+    if (activeNumber === 1) {
       isActive = true;
     }
 
