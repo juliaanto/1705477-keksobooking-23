@@ -32,25 +32,25 @@ const SIMILAR_ANNOUNCEMENTS = 10;
 /**
  * Возвращает случайное число с плавающей точкой из переданного положительного диапазона
  *
- * @param {*} min - начало диапазона
- * @param {*} max - конец диапазона
- * @param {*} digits - количество знаков после запятой
- * @return {*}
+ * @param {number} min - начало диапазона
+ * @param {number} max - конец диапазона
+ * @param {number} digits - количество знаков после запятой
+ * @return {number}
  */
 function getRandomDecimal (min, max, digits) {
   if (min >= max) {
     throw 'Введены некорректные значения. Значение "До" должно быть больше значения "От".';
   }
 
-  return (Math.random() * (max - min) + min).toFixed(digits);
+  return Number((Math.random() * (max - min) + min).toFixed(digits));
 }
 
 /**
  * Возвращает случайное целое число из переданного положительного диапазона
  *
- * @param {*} min - начало диапазона
- * @param {*} max - конец диапазона
- * @return {*}
+ * @param {number} min - начало диапазона
+ * @param {number} max - конец диапазона
+ * @return {number}
  */
 function getRandomNumber (min, max) {
   return getRandomDecimal(min, max, 0);
@@ -59,15 +59,16 @@ function getRandomNumber (min, max) {
 /**
  * Поиск случайного элемента в переданном массиве
  *
- * @param {*} elements - массив
+ * @param {object} elements - массив
+ * @return {string}
  */
 const getRandomArrayElement = (elements) => elements[getRandomNumber(0, elements.length - 1)];
 
 /**
  * Создает массив случайной длины на основе переданного массива
  *
- * @param {*} array - исходный массив
- * @return {*}
+ * @param {object} array - исходный массив
+ * @return {object}
  */
 const getRandomArray = (array) => {
 
@@ -75,7 +76,7 @@ const getRandomArray = (array) => {
   const elementsCount = getRandomNumber(1,[array.length]);
 
   for (let currentElement = 0; currentElement < elementsCount - 1; currentElement++) {
-    const activeNumber = Number(getRandomNumber(0,1));
+    const activeNumber = getRandomNumber(0,1);
     let isActive = false;
 
     if (activeNumber === 1) {
@@ -92,7 +93,7 @@ const getRandomArray = (array) => {
 /**
  * Создает автора
  *
- * @return {*}
+ * @return {object}
  */
 const createAutor = () => {
   const author = {
@@ -104,7 +105,7 @@ const createAutor = () => {
 /**
  * Создает предложение (которое содержит информацию об объявлении)
  *
- * @return {*}
+ * @return {object}
  */
 const createOffer = (addressX, addressY) => {
   const offer = {
@@ -126,7 +127,7 @@ const createOffer = (addressX, addressY) => {
 /**
  *  Создает объявление
  *
- * @return {*}
+ * @return {object}
  */
 const createAnnouncement = () => {
   const lat = getRandomDecimal(35.65000, 35.70000, 5);
