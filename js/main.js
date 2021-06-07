@@ -73,19 +73,11 @@ function getRandomElementFromArray(elements) {
  * @return {object}
  */
 function getRandomArray(array) {
-
   const currentArray = [];
-  const elementsCount = getRandomNumber(1,[array.length]);
+  const elementsCount = getRandomNumber(1, array.length);
 
   for (let currentElement = 0; currentElement < elementsCount - 1; currentElement++) {
-    const activeNumber = getRandomNumber(0,1);
-    let isActive = false;
-
-    if (activeNumber === 1) {
-      isActive = true;
-    }
-
-    if (isActive) {
+    if (getRandomNumber(0,1)) {
       currentArray.push(array[currentElement]);
     }
   }
