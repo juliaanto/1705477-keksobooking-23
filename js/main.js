@@ -27,6 +27,8 @@ const PHOTOS = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
 ];
 
+const SIMILAR_ANNOUNCEMENTS = 10;
+
 /**
  * Возвращает случайное число с плавающей точкой из переданного положительного диапазона
  *
@@ -129,4 +131,4 @@ function createSimilarAnnouncements(count) {
   return array;
 }
 
-createSimilarAnnouncements(10);
+createSimilarAnnouncements(SIMILAR_ANNOUNCEMENTS);
