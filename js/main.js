@@ -27,8 +27,6 @@ const PHOTOS = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
 ];
 
-const SIMILAR_ANNOUNCEMENTS = 10;
-
 /**
  * Возвращает случайное число с плавающей точкой из переданного положительного диапазона
  *
@@ -120,14 +118,15 @@ function createAnnouncement(index) {
 /**
  * Создает массив объявлений из заданного количества объектов
  *
+ * @param {number} count - количество объектов
  * @return {object}
  */
-function similarAnnouncements() {
+function createSimilarAnnouncements(count) {
   const array = [];
-  for (let index = 1; index < SIMILAR_ANNOUNCEMENTS + 1; index++) {
+  for (let index = 1; index < count + 1; index++) {
     array.push(createAnnouncement(index));
   }
   return array;
 }
 
-similarAnnouncements();
+createSimilarAnnouncements(10);
