@@ -37,13 +37,13 @@ const SIMILAR_ANNOUNCEMENTS = 10;
  * @param {number} digits - количество знаков после запятой
  * @return {number}
  */
-function getRandomDecimal (min, max, digits) {
+const getRandomDecimal = (min, max, digits) => {
   if (min >= max) {
     throw 'Введены некорректные значения. Значение "До" должно быть больше значения "От".';
   }
 
   return Number((Math.random() * (max - min) + min).toFixed(digits));
-}
+};
 
 /**
  * Возвращает случайное целое число из переданного положительного диапазона
@@ -52,9 +52,7 @@ function getRandomDecimal (min, max, digits) {
  * @param {number} max - конец диапазона
  * @return {number}
  */
-function getRandomNumber(min, max) {
-  return getRandomDecimal(min, max, 0);
-}
+const getRandomNumber = (min, max) => getRandomDecimal(min, max, 0);
 
 /**
  * Поиск случайного элемента в переданном массиве
@@ -62,9 +60,7 @@ function getRandomNumber(min, max) {
  * @param {object} elements - массив
  * @return {string}
  */
-function getRandomElementFromArray(elements) {
-  return elements[getRandomNumber(0, elements.length - 1)];
-}
+const getRandomElementFromArray = (elements) => elements[getRandomNumber(0, elements.length - 1)];
 
 /**
  * Создает массив случайной длины на основе переданного массива
@@ -72,7 +68,7 @@ function getRandomElementFromArray(elements) {
  * @param {object} array - исходный массив
  * @return {object}
  */
-function getRandomArray(array) {
+const getRandomArray = (array) => {
   const currentArray = [];
   const elementsCount = getRandomNumber(1, array.length);
 
@@ -82,14 +78,14 @@ function getRandomArray(array) {
     }
   }
   return currentArray;
-}
+};
 
 /**
  *  Создает объявление
  *
  * @return {object}
  */
-function createAnnouncement(index) {
+const createAnnouncement = (index) => {
   const locationX = getRandomDecimal(35.65000, 35.70000, 5);
   const locationY = getRandomDecimal(139.70000, 139.80000, 5);
   const announcement = {
@@ -115,7 +111,7 @@ function createAnnouncement(index) {
     },
   };
   return announcement;
-}
+};
 
 /**
  * Создает массив объявлений из заданного количества объектов
@@ -123,12 +119,12 @@ function createAnnouncement(index) {
  * @param {number} count - количество объектов
  * @return {object}
  */
-function createSimilarAnnouncements(count) {
+const createSimilarAnnouncements = (count) => {
   const array = [];
   for (let index = 1; index < count + 1; index++) {
     array.push(createAnnouncement(index));
   }
   return array;
-}
+};
 
 createSimilarAnnouncements(SIMILAR_ANNOUNCEMENTS);
