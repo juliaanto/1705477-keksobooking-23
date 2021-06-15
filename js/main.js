@@ -121,8 +121,8 @@ const createAnnouncement = (index) => {
  */
 const createSimilarAnnouncements = (count) => {
   const array = [];
-  for (let index = 1; index < count + 1; index++) {
-    array.push(createAnnouncement(index));
+  for (let i = 1; i < count + 1; i++) {
+    array.push(createAnnouncement(i));
   }
   return array;
 };
