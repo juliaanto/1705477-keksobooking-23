@@ -3,6 +3,11 @@ import {hideEmptyBlock, getOfferType, getFeatures, getPhotos} from './util.js';
 const map = document.querySelector('#map-canvas');
 const similarAnnouncementTemplate = document.querySelector('#card').content;
 
+/**
+ * Генерирует разметку похожих объявлений на основе данных
+ *
+ * @param {object} announcements - массив объявлений
+ */
 const renderAnnouncements = (announcements) => {
   announcements.forEach((announcement) => {
     const announcementElement = similarAnnouncementTemplate.cloneNode(true);

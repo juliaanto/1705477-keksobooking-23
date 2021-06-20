@@ -1,3 +1,9 @@
+/**
+ * Скрывает отсутствующие блоки в карточке
+ *
+ * @param {object} announcement - элемент массива данных с объявлениями
+ * @param {object} element - новое объявление, создаваемое по шаблону
+ */
 const hideEmptyBlock = (announcement, element) => {
   if (announcement.author.avatar === undefined) {
     element.querySelector('.popup__avatar').classList.add('hidden');
@@ -24,6 +30,12 @@ const hideEmptyBlock = (announcement, element) => {
   }
 };
 
+/**
+ * Получает название типа жилья из кодового названия
+ *
+ * @param {string} offerType - кодовое название типа жилья
+ * @return {string} - название типа жилья
+ */
 const getOfferType = (offerType) => {
   let offerTypeValue = '';
   if (offerType === 'flat') {
@@ -40,6 +52,12 @@ const getOfferType = (offerType) => {
   return offerTypeValue;
 };
 
+/**
+ * Выводит все доступные удобства в объявлении
+ *
+ * @param {object} announcement - элемент массива данных с объявлениями
+ * @param {object} element - новое объявление, создаваемое по шаблону
+ */
 const getFeatures = (announcement, element) => {
   const featuresList = element.querySelector('.popup__features');
   const announcementFeatures = announcement.offer.features;
@@ -58,6 +76,12 @@ const getFeatures = (announcement, element) => {
   }
 };
 
+/**
+ * Выводит все фотографии объявления
+ *
+ * @param {object} announcement - элемент массива данных с объявлениями
+ * @param {object} element - новое объявление, создаваемое по шаблону
+ */
 const getPhotos = (announcement, element) => {
   const photosList = element.querySelector('.popup__photos');
   const photoTemplate = element.querySelector('.popup__photo');
