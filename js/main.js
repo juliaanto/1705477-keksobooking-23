@@ -1,5 +1,10 @@
 import {createSimilarAnnouncements} from './mock/data.js';
-import {renderAnnouncements} from './similar-announcement-list.js';
+import {renderCard} from './similar-announcement-list.js';
+import {disablePage, activatePage} from './ad-form.js';
 
-const SIMILAR_ANNOUNCEMENTS = 1;
-renderAnnouncements(createSimilarAnnouncements(SIMILAR_ANNOUNCEMENTS));
+const SIMILAR_ANNOUNCEMENTS = 10;
+const similarAnnouncements = createSimilarAnnouncements(SIMILAR_ANNOUNCEMENTS);
+renderCard(similarAnnouncements[0]);
+
+disablePage();
+activatePage();
