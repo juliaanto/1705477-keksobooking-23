@@ -1,3 +1,5 @@
+import {offerType} from './const.js';
+
 /**
  * Отображает в карточке блоки: аватарка пользователя, цена, количество гостей и комнат, время заезда и выезда
  *
@@ -28,28 +30,12 @@ const renderCardBlocks = (announcement, element) => {
   } else {
     element.querySelector('.popup__text--time').textContent = `Заезд после ${announcement.offer.checkin}, выезд до ${announcement.offer.checkout}`;
   }
-};
 
-/**
- * Получает название типа жилья из кодового названия
- *
- * @param {string} offerType - кодовое название типа жилья
- * @return {string} - название типа жилья
- */
-const getOfferType = (offerType) => {
-  let offerTypeValue = '';
-  if (offerType === 'flat') {
-    offerTypeValue = 'Квартира';
-  } else if (offerType === 'bungalow') {
-    offerTypeValue = 'Бунгало';
-  } else if (offerType === 'house') {
-    offerTypeValue = 'Дом';
-  } else if (offerType === 'palace') {
-    offerTypeValue = 'Дворец';
-  } else if (offerType === 'hotel') {
-    offerTypeValue = 'Отель';
+  if (announcement.offer.type === undefined) {
+    element.querySelector('.popup__type').remove();
+  } else {
+    element.querySelector('.popup__type').textContent = offerType[announcement.offer.type];
   }
-  return offerTypeValue;
 };
 
 /**
@@ -59,26 +45,17 @@ const getOfferType = (offerType) => {
  * @param {object} element - новое объявление, создаваемое по шаблону
  */
 const getFeatures = (announcement, element) => {
-  const featuresList = element.querySelector('.popup__features');
   const announcementFeatures = announcement.offer.features;
+  const featureList = element.querySelector('.popup__features');
+  const modifiers = announcementFeatures.map((feature) => `popup__feature--${feature}`);
 
-
-  if (announcementFeatures === undefined) {
-    element.querySelector('.popup__features').remove();
-  } else {
-    while (featuresList.firstChild) {
-      featuresList.removeChild(featuresList.firstChild);
-    }
-
-    if (announcementFeatures !== undefined) {
-      announcementFeatures.forEach((feature) => {
-        const newFeature = document.createElement('li');
-        newFeature.classList.add('popup__feature');
-        newFeature.classList.add(`popup__feature--${feature}`);
-        featuresList.appendChild(newFeature);
-      });
-    }
-  }
+  featureList.querySelectorAll('.popup__feature')
+    .forEach((item) => {
+      const modifier = item.classList[1];
+      if (!modifiers.includes(modifier)) {
+        item.remove();
+      }
+    });
 };
 
 /**
@@ -105,4 +82,4 @@ const getPhotos = (announcement, element) => {
   }
 };
 
-export {renderCardBlocks, getOfferType, getFeatures, getPhotos};
+export {renderCardBlocks, getFeatures, getPhotos};
