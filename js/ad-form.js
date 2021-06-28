@@ -1,4 +1,4 @@
-import {linkRoomNumberToCapacity} from './const.js';
+import {linkRoomNumberToCapacity, linkTypeToPrice} from './const.js';
 
 const adForm = document.querySelector('.ad-form');
 const formFieldset = adForm.querySelectorAll('fieldset');
@@ -9,6 +9,10 @@ const capacityInput = adForm.querySelector('#capacity');
 const capacityOptions = capacityInput.querySelectorAll('option');
 const roomNumberInput = adForm.querySelector('#room_number');
 const submitButton = adForm.querySelector('.ad-form__submit');
+const typeInput = adForm.querySelector('#type');
+const priceInput = adForm.querySelector('#price');
+const timeinInput = adForm.querySelector('#timein');
+const timeoutInput = adForm.querySelector('#timeout');
 
 /**
  * Переводит страницу в неактивное состояние
@@ -75,6 +79,25 @@ const checkCapacityInput = () => {
 
 roomNumberInput.addEventListener('input', () => {
   setAvailableСapacity();
+});
+
+typeInput.addEventListener('input', () => {
+  const type = typeInput.value;
+
+  priceInput.setAttribute('min', linkTypeToPrice[type]);
+  priceInput.setAttribute('placeholder', linkTypeToPrice[type]);
+});
+
+timeinInput.addEventListener('input', () => {
+  const timein = timeinInput.value;
+
+  timeoutInput.value = timein;
+});
+
+timeoutInput.addEventListener('input', () => {
+  const timeout = timeoutInput.value;
+
+  timeinInput.value = timeout;
 });
 
 /**
