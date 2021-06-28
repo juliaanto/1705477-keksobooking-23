@@ -1,12 +1,30 @@
 import {offerType} from './const.js';
 
 /**
- * Отображает в карточке блоки: аватарка пользователя, цена, количество гостей и комнат, время заезда и выезда
+ * Отображает в карточке блоки: заголовок, адрес, описание, аватарка пользователя, цена, количество гостей и комнат, время заезда и выезда
  *
  * @param {object} announcement - элемент массива данных с объявлениями
  * @param {object} element - новое объявление, создаваемое по шаблону
  */
 const renderCardBlocks = (announcement, element) => {
+  if (announcement.offer.title === undefined) {
+    element.querySelector('.popup__title').remove();
+  } else {
+    element.querySelector('.popup__title').textContent = announcement.offer.title;
+  }
+
+  if (announcement.offer.address === undefined) {
+    element.querySelector('.popup__text--address').remove();
+  } else {
+    element.querySelector('.popup__text--address').textContent = announcement.offer.address;
+  }
+
+  if (announcement.offer.description === undefined) {
+    element.querySelector('.popup__description').remove();
+  } else {
+    element.querySelector('.popup__description').textContent = announcement.offer.description;
+  }
+
   if (announcement.author.avatar === undefined) {
     element.querySelector('.popup__avatar').remove();
   } else {

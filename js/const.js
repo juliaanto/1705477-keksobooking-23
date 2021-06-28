@@ -6,4 +6,11 @@ const offerType = {
   hotel: 'Отель',
 };
 
-export {offerType};
+const linkRoomNumberToCapacity = {
+  1: [1],
+  2: [1, 2],
+  3: [1, 2, 3],
+  100: [0],
+};
+
+export {offerType, linkRoomNumberToCapacity};
