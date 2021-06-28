@@ -1,4 +1,4 @@
-import {linkRoomNumberToCapacity} from './const.js';
+import {linkRoomNumberToCapacity, linkTypeToPrice} from './const.js';
 
 const adForm = document.querySelector('.ad-form');
 const formFieldset = adForm.querySelectorAll('fieldset');
@@ -9,7 +9,15 @@ const capacityInput = adForm.querySelector('#capacity');
 const capacityOptions = capacityInput.querySelectorAll('option');
 const roomNumberInput = adForm.querySelector('#room_number');
 const submitButton = adForm.querySelector('.ad-form__submit');
+const typeInput = adForm.querySelector('#type');
+const priceInput = adForm.querySelector('#price');
+const timeinInput = adForm.querySelector('#timein');
+const timeoutInput = adForm.querySelector('#timeout');
 
+/**
+ * Переводит страницу в неактивное состояние
+ *
+ */
 const disablePage = () => {
   adForm.classList.add('ad-form--disabled');
   formFieldset.forEach((element) => {element.setAttribute('disabled', 'disabled');
@@ -21,6 +29,10 @@ const disablePage = () => {
   });
 };
 
+/**
+ * Переводит страницу в активное состояние
+ *
+ */
 const activatePage = () => {
   adForm.classList.remove('ad-form--disabled');
   formFieldset.forEach((element) => {element.removeAttribute('disabled', 'disabled');
@@ -32,22 +44,31 @@ const activatePage = () => {
   });
 };
 
+/**
+ * Ограничивает допустимые варианты выбора количества гостей в зависимости от выбранного количества комнат
+ *
+ */
 const setAvailableСapacity = () => {
   const roomNumber = Number(roomNumberInput.value);
-  const availableСapacity = Array.from(linkRoomNumberToCapacity[roomNumber]);
+  const availableСapacity = linkRoomNumberToCapacity[roomNumber];
 
   capacityOptions.forEach((element) => {
-    element.removeAttribute('disabled', 'disabled');
     if (!availableСapacity.includes(Number(element.value))) {
       element.setAttribute('disabled', 'disabled');
+    } else {
+      element.removeAttribute('disabled', 'disabled');
     }
   });
 };
 
+/**
+ * Проверяет корректность введенного значения количества мест
+ *
+ */
 const checkCapacityInput = () => {
   const roomNumber = Number(roomNumberInput.value);
   const capacity = Number(capacityInput.value);
-  const availableСapacity = Array.from(linkRoomNumberToCapacity[roomNumber]);
+  const availableСapacity = linkRoomNumberToCapacity[roomNumber];
 
   if (availableСapacity.includes(capacity)) {
     capacityInput.setCustomValidity('');
@@ -60,6 +81,29 @@ roomNumberInput.addEventListener('input', () => {
   setAvailableСapacity();
 });
 
+typeInput.addEventListener('input', () => {
+  const type = typeInput.value;
+
+  priceInput.setAttribute('min', linkTypeToPrice[type]);
+  priceInput.setAttribute('placeholder', linkTypeToPrice[type]);
+});
+
+timeinInput.addEventListener('input', () => {
+  const timein = timeinInput.value;
+
+  timeoutInput.value = timein;
+});
+
+timeoutInput.addEventListener('input', () => {
+  const timeout = timeoutInput.value;
+
+  timeinInput.value = timeout;
+});
+
+/**
+ * Проверяет корректность формы перед отправкой
+ *
+ */
 const checkFormBeforeSubmit = () => {
   submitButton.addEventListener('click', () => {
     checkCapacityInput();
