@@ -1,5 +1,6 @@
 import {disablePage, activatePage, setAddress} from './ad-form.js';
 import {addressDigits, initialAddress} from './const.js';
+import {createSimilarAnnouncements} from './mock/data.js';
 
 disablePage();
 
@@ -18,8 +19,8 @@ L.tileLayer(
 
 const mainPinIcon = L.icon({
   iconUrl: './leaflet/images/marker-icon-2x.png',
-  iconSize: [50, 82],
-  iconAnchor: [25, 82],
+  iconSize: [52, 52],
+  iconAnchor: [26, 52],
 });
 
 const mainPinMarker = L.marker(
@@ -51,6 +52,25 @@ mainPinMarker.on('moveend', (evt) => {
   const latLng = evt.target.getLatLng();
 
   setAddress(getAddress(latLng));
+});
+
+const pinIcon = L.icon({
+  iconUrl: './leaflet/images/marker-icon.png',
+  iconSize: [40, 40],
+});
+
+const SIMILAR_ANNOUNCEMENTS = 10;
+const similarAnnouncements = createSimilarAnnouncements(SIMILAR_ANNOUNCEMENTS);
+
+similarAnnouncements.forEach(({location: {lat, lng}}) => {
+  const pinMarker = L.marker({
+    lat,
+    lng,
+  },
+  {
+    icon: pinIcon,
+  });
+  pinMarker.addTo(map);
 });
 
 export {mainPinMarker};
