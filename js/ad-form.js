@@ -13,6 +13,7 @@ const typeInput = adForm.querySelector('#type');
 const priceInput = adForm.querySelector('#price');
 const timeinInput = adForm.querySelector('#timein');
 const timeoutInput = adForm.querySelector('#timeout');
+const addressInput = adForm.querySelector('#address');
 
 /** Переводит страницу в неактивное состояние */
 const disablePage = () => {
@@ -69,11 +70,17 @@ roomNumberInput.addEventListener('input', () => {
   setAvailableСapacity();
 });
 
-typeInput.addEventListener('input', () => {
+const checkPriceInput = () => {
   const type = typeInput.value;
 
   priceInput.setAttribute('min', linkTypeToPrice[type]);
   priceInput.setAttribute('placeholder', linkTypeToPrice[type]);
+};
+
+checkPriceInput();
+
+typeInput.addEventListener('input', () => {
+  checkPriceInput();
 });
 
 timeinInput.addEventListener('input', () => {
@@ -88,6 +95,10 @@ timeoutInput.addEventListener('input', () => {
   timeinInput.value = timeout;
 });
 
+const setAddress = (addressValue) => {
+  addressInput.value = addressValue;
+};
+
 /** Проверяет корректность формы перед отправкой */
 const checkFormBeforeSubmit = () => {
   submitButton.addEventListener('click', () => {
@@ -95,4 +106,4 @@ const checkFormBeforeSubmit = () => {
   });
 };
 
-export {disablePage, activatePage, checkFormBeforeSubmit, setAvailableСapacity};
+export {disablePage, activatePage, checkFormBeforeSubmit, setAvailableСapacity, setAddress};

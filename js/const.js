@@ -21,4 +21,11 @@ const linkTypeToPrice = {
   palace: 10000,
 };
 
-export {offerType, linkRoomNumberToCapacity, linkTypeToPrice};
+const addressDigits = 5;
+
+const initialAddress = {
+  lat: 35.681700,
+  lng: 139.753891,
+};
+
+export {offerType, linkRoomNumberToCapacity, linkTypeToPrice, addressDigits, initialAddress};
