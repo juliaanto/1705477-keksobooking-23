@@ -1,6 +1,5 @@
 import {renderCardBlocks, getFeatures, getPhotos} from './util.js';
 
-const map = document.querySelector('#map-canvas');
 const similarAnnouncementTemplate = document.querySelector('#card').content;
 
 /**
@@ -13,7 +12,8 @@ const renderCard = (announcement) => {
   getFeatures(announcement, announcementElement);
   getPhotos(announcement, announcementElement);
   renderCardBlocks(announcement, announcementElement);
-  map.appendChild(announcementElement);
+
+  return announcementElement;
 };
 
 export {renderCard};
