@@ -1,13 +1,12 @@
-import {disablePage, activatePage, setAddress} from './ad-form.js';
+import {disableForm, enableForm, setAddress} from './ad-form.js';
 import {addressDigits, initialAddress} from './const.js';
-import {createSimilarAnnouncements} from './mock/data.js';
-import {renderCard} from './similar-announcement-list.js';
+import {renderCard} from './card.js';
 
-disablePage();
+disableForm();
 
 const map = L.map('map-canvas')
   .on('load', () => {
-    activatePage();
+    enableForm();
   })
   .setView(initialAddress, 10);
 
@@ -19,7 +18,7 @@ L.tileLayer(
 ).addTo(map);
 
 const mainPinIcon = L.icon({
-  iconUrl: './leaflet/images/marker-icon-2x.png',
+  iconUrl: './img/main-pin.svg',
   iconSize: [52, 52],
   iconAnchor: [26, 52],
 });
@@ -55,31 +54,33 @@ mainPinMarker.on('moveend', (evt) => {
   setAddress(getAddress(latLng));
 });
 
-const SIMILAR_ANNOUNCEMENTS = 10;
-const similarAnnouncements = createSimilarAnnouncements(SIMILAR_ANNOUNCEMENTS);
+// const SIMILAR_ANNOUNCEMENTS = 10;
+// const similarAnnouncements = createSimilarAnnouncements(SIMILAR_ANNOUNCEMENTS);
 
-similarAnnouncements.forEach((announcement) => {
+const addPinsToMap = (announcements) => {
+  announcements.forEach((announcement) => {
 
-  const lat = announcement.location.lat;
-  const lng = announcement.location.lng;
+    const lat = announcement.location.lat;
+    const lng = announcement.location.lng;
 
-  const pinIcon = L.icon({
-    iconUrl: './leaflet/images/marker-icon.png',
-    iconSize: [40, 40],
+    const pinIcon = L.icon({
+      iconUrl: './img/pin.svg',
+      iconSize: [40, 40],
+    });
+
+    const pinMarker = L.marker({
+      lat,
+      lng,
+    },
+    {
+      icon: pinIcon,
+    });
+    pinMarker
+      .addTo(map)
+      .bindPopup(
+        renderCard(announcement),
+      );
   });
+};
 
-  const pinMarker = L.marker({
-    lat,
-    lng,
-  },
-  {
-    icon: pinIcon,
-  });
-  pinMarker
-    .addTo(map)
-    .bindPopup(
-      renderCard(announcement),
-    );
-});
-
-export {mainPinMarker};
+export {addPinsToMap};

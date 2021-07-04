@@ -1,5 +1,7 @@
 import {offerType} from './const.js';
 
+const similarAnnouncementTemplate = document.querySelector('#card').content;
+
 /**
  * Отображает в карточке блоки: заголовок, адрес, описание, аватарка пользователя, цена, количество гостей и комнат, время заезда и выезда
  *
@@ -100,4 +102,18 @@ const getPhotos = (announcement, element) => {
   }
 };
 
-export {renderCardBlocks, getFeatures, getPhotos};
+/**
+ * Генерирует разметку карточки объявления на основе данных
+ *
+ * @param {object} announcement - объявление
+ */
+const renderCard = (announcement) => {
+  const announcementElement = similarAnnouncementTemplate.cloneNode(true);
+  getFeatures(announcement, announcementElement);
+  getPhotos(announcement, announcementElement);
+  renderCardBlocks(announcement, announcementElement);
+
+  return announcementElement;
+};
+
+export {renderCard};

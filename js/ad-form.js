@@ -11,12 +11,12 @@ const roomNumberInput = adForm.querySelector('#room_number');
 const submitButton = adForm.querySelector('.ad-form__submit');
 const typeInput = adForm.querySelector('#type');
 const priceInput = adForm.querySelector('#price');
-const timeinInput = adForm.querySelector('#timein');
-const timeoutInput = adForm.querySelector('#timeout');
+const timeInInput = adForm.querySelector('#timein');
+const timeOutInput = adForm.querySelector('#timeout');
 const addressInput = adForm.querySelector('#address');
 
 /** Переводит страницу в неактивное состояние */
-const disablePage = () => {
+const disableForm = () => {
   adForm.classList.add('ad-form--disabled');
   formFieldset.forEach((element) => {element.setAttribute('disabled', 'disabled');
   });
@@ -28,7 +28,7 @@ const disablePage = () => {
 };
 
 /** Переводит страницу в активное состояние */
-const activatePage = () => {
+const enableForm = () => {
   adForm.classList.remove('ad-form--disabled');
   formFieldset.forEach((element) => {element.removeAttribute('disabled', 'disabled');
   });
@@ -40,7 +40,7 @@ const activatePage = () => {
 };
 
 /** Ограничивает допустимые варианты выбора количества гостей в зависимости от выбранного количества комнат */
-const setAvailableСapacity = () => {
+const setAvailableCapacity = () => {
   const roomNumber = Number(roomNumberInput.value);
   const availableСapacity = linkRoomNumberToCapacity[roomNumber];
 
@@ -67,7 +67,7 @@ const checkCapacityInput = () => {
 };
 
 roomNumberInput.addEventListener('input', () => {
-  setAvailableСapacity();
+  setAvailableCapacity();
 });
 
 const checkPriceInput = () => {
@@ -83,16 +83,16 @@ typeInput.addEventListener('input', () => {
   checkPriceInput();
 });
 
-timeinInput.addEventListener('input', () => {
-  const timein = timeinInput.value;
+timeInInput.addEventListener('input', () => {
+  const timein = timeInInput.value;
 
-  timeoutInput.value = timein;
+  timeOutInput.value = timein;
 });
 
-timeoutInput.addEventListener('input', () => {
-  const timeout = timeoutInput.value;
+timeOutInput.addEventListener('input', () => {
+  const timeout = timeOutInput.value;
 
-  timeinInput.value = timeout;
+  timeInInput.value = timeout;
 });
 
 const setAddress = (addressValue) => {
@@ -106,4 +106,4 @@ const checkFormBeforeSubmit = () => {
   });
 };
 
-export {disablePage, activatePage, checkFormBeforeSubmit, setAvailableСapacity, setAddress};
+export {disableForm, enableForm, checkFormBeforeSubmit, setAvailableCapacity, setAddress};
