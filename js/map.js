@@ -1,21 +1,23 @@
-import {disableForm, enableForm, setAddress} from './ad-form.js';
-import {addressDigits, initialAddress} from './const.js';
+import {enableForm, setAddress} from './ad-form.js';
+import {ADDRESS_DIGITS, initialAddress} from './const.js';
 import {renderCard} from './card.js';
 
-disableForm();
+const map = L.map('map-canvas');
 
-const map = L.map('map-canvas')
-  .on('load', () => {
-    enableForm();
-  })
-  .setView(initialAddress, 10);
+const activateMap = () => {
+  map
+    .on('load', () => {
+      enableForm();
+    })
+    .setView(initialAddress, 12);
 
-L.tileLayer(
-  'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-  {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-  },
-).addTo(map);
+  L.tileLayer(
+    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    },
+  ).addTo(map);
+};
 
 const mainPinIcon = L.icon({
   iconUrl: './img/main-pin.svg',
@@ -40,22 +42,19 @@ mainPinMarker.addTo(map);
  * @return {string} - коррдинаты (строка)
  */
 const getAddress = (latLng) => {
-  const lat = latLng.lat.toFixed(addressDigits);
-  const lng = latLng.lng.toFixed(addressDigits);
+  const lat = latLng.lat.toFixed(ADDRESS_DIGITS);
+  const lng = latLng.lng.toFixed(ADDRESS_DIGITS);
 
   return `${lat}, ${lng}`;
 };
 
 setAddress(getAddress(initialAddress));
 
-mainPinMarker.on('moveend', (evt) => {
+mainPinMarker.on('move', (evt) => {
   const latLng = evt.target.getLatLng();
 
   setAddress(getAddress(latLng));
 });
-
-// const SIMILAR_ANNOUNCEMENTS = 10;
-// const similarAnnouncements = createSimilarAnnouncements(SIMILAR_ANNOUNCEMENTS);
 
 const addPinsToMap = (announcements) => {
   announcements.forEach((announcement) => {
@@ -83,4 +82,4 @@ const addPinsToMap = (announcements) => {
   });
 };
 
-export {addPinsToMap};
+export {activateMap, addPinsToMap};

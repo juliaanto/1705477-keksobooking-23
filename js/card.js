@@ -1,6 +1,6 @@
 import {offerType} from './const.js';
 
-const similarAnnouncementTemplate = document.querySelector('#card').content;
+const similarAnnouncementTemplate = document.querySelector('#card').content.querySelector('.popup');
 
 /**
  * Отображает в карточке блоки: заголовок, адрес, описание, аватарка пользователя, цена, количество гостей и комнат, время заезда и выезда
