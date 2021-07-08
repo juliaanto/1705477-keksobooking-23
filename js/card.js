@@ -67,15 +67,21 @@ const renderCardBlocks = (announcement, element) => {
 const getFeatures = (announcement, element) => {
   const announcementFeatures = announcement.offer.features;
   const featureList = element.querySelector('.popup__features');
-  const modifiers = announcementFeatures.map((feature) => `popup__feature--${feature}`);
 
-  featureList.querySelectorAll('.popup__feature')
-    .forEach((item) => {
-      const modifier = item.classList[1];
-      if (!modifiers.includes(modifier)) {
-        item.remove();
-      }
-    });
+
+  if (announcementFeatures === undefined) {
+    element.querySelector('.popup__features').remove();
+  } else {
+    const modifiers = announcementFeatures.map((feature) => `popup__feature--${feature}`);
+
+    featureList.querySelectorAll('.popup__feature')
+      .forEach((item) => {
+        const modifier = item.classList[1];
+        if (!modifiers.includes(modifier)) {
+          item.remove();
+        }
+      });
+  }
 };
 
 /**

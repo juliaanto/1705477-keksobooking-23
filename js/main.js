@@ -1,13 +1,12 @@
 import {disableForm} from './ad-form.js';
-import {activateMap, addPinsToMap} from './map.js';
+import {activateMap} from './map.js';
 import {checkFormBeforeSubmit, setAvailableCapacity} from './ad-form.js';
-import {createSimilarAnnouncements} from './mock/data.js';
+import {showSimilarAnnouncements} from './server.js';
 
 const SIMILAR_ANNOUNCEMENTS = 10;
 
 disableForm();
 activateMap();
-const similarAnnouncements = createSimilarAnnouncements(SIMILAR_ANNOUNCEMENTS);
-addPinsToMap(similarAnnouncements);
+showSimilarAnnouncements(SIMILAR_ANNOUNCEMENTS);
 checkFormBeforeSubmit();
 setAvailableCapacity();
