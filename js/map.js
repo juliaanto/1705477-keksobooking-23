@@ -1,4 +1,4 @@
-import {enableForm, setAddress} from './ad-form.js';
+import {enableForm, setAddress} from './form.js';
 import {ADDRESS_DIGITS, initialAddress} from './const.js';
 import {renderCard} from './card.js';
 

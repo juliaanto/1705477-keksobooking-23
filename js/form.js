@@ -106,4 +106,18 @@ const checkFormBeforeSubmit = () => {
   });
 };
 
+adForm.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+
+  const formData = new FormData(evt.target);
+
+  fetch(
+    'https://23.javascript.pages.academy/keksobooking',
+    {
+      method: 'POST',
+      body: formData,
+    },
+  );
+});
+
 export {disableForm, enableForm, checkFormBeforeSubmit, setAvailableCapacity, setAddress};
