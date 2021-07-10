@@ -1,4 +1,6 @@
+import {sendData} from './api.js';
 import {linkRoomNumberToCapacity, linkTypeToPrice} from './const.js';
+import {resetPage} from './util.js';
 
 const adForm = document.querySelector('.ad-form');
 const formFieldset = adForm.querySelectorAll('fieldset');
@@ -93,18 +95,20 @@ const checkFormBeforeSubmit = () => {
   });
 };
 
+/**
+ * Сбрасывает значения полей в изначальное состояние
+ *
+ */
+const resetForm = () => {
+  adForm.reset();
+};
+
 adForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
 
   const formData = new FormData(evt.target);
 
-  fetch(
-    'https://23.javascript.pages.academy/keksobooking',
-    {
-      method: 'POST',
-      body: formData,
-    },
-  );
+  sendData(resetPage, formData);
 });
 
-export {disableForm, enableForm, checkFormBeforeSubmit, setAvailableCapacity, setAddress};
+export {disableForm, enableForm, checkFormBeforeSubmit, setAvailableCapacity, setAddress, resetForm};

@@ -39,7 +39,7 @@ mainPinMarker.addTo(map);
  * Преобразует координаты в строку
  *
  * @param {object} latLng - координаты (объект)
- * @return {string} - коррдинаты (строка)
+ * @return {string} - координаты (строка)
  */
 const getAddress = (latLng) => {
   const lat = latLng.lat.toFixed(ADDRESS_DIGITS);

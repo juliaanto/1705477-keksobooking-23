@@ -1,5 +1,16 @@
+
+import {resetFilters} from './filters.js';
+import {resetForm} from './form.js';
+
+
 const ALERT_SHOW_TIME = 5000;
 
+
+/**
+ * Показывает сообщение об ошибке, отображается поверх фильтров
+ *
+ * @param {string} message - текст сообщения об ошибке
+ */
 const showAlert = (message) => {
   const map = document.querySelector('.map');
   const alertContainer = document.createElement('div');
@@ -23,4 +34,9 @@ const showAlert = (message) => {
   }, ALERT_SHOW_TIME);
 };
 
-export {showAlert};
+const resetPage = () => {
+  resetForm();
+  resetFilters();
+};
+
+export {showAlert, resetPage};

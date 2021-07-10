@@ -20,4 +20,12 @@ const enableFilters = () => {
   });
 };
 
-export {disableFilters, enableFilters};
+/**
+ * Сбрасывает значения полей в изначальное состояние
+ *
+ */
+const resetFilters = () => {
+  mapFilters.reset();
+};
+
+export {disableFilters, enableFilters, resetFilters};
