@@ -48,13 +48,18 @@ const getAddress = (latLng) => {
   return `${lat}, ${lng}`;
 };
 
-setAddress(getAddress(initialAddress));
+const initialAddressString = getAddress(initialAddress);
 
 mainPinMarker.on('move', (evt) => {
   const latLng = evt.target.getLatLng();
 
   setAddress(getAddress(latLng));
 });
+
+/** Возвращает главную метку в исходное состояние */
+const resetMainPin = () => {
+  mainPinMarker.setLatLng(initialAddress);
+};
 
 const addPinsToMap = (announcements) => {
   announcements.forEach((announcement) => {
@@ -82,4 +87,4 @@ const addPinsToMap = (announcements) => {
   });
 };
 
-export {activateMap, addPinsToMap};
+export {activateMap, addPinsToMap, resetMainPin, initialAddressString};

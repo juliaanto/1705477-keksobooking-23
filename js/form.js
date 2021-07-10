@@ -1,5 +1,6 @@
 import {sendData} from './api.js';
 import {linkRoomNumberToCapacity, linkTypeToPrice} from './const.js';
+import { initialAddressString } from './map.js';
 import {resetPage} from './util.js';
 
 const adForm = document.querySelector('.ad-form');
@@ -88,6 +89,8 @@ const setAddress = (addressValue) => {
   addressInput.value = addressValue;
 };
 
+setAddress(initialAddressString);
+
 /** Проверяет корректность формы перед отправкой */
 const checkFormBeforeSubmit = () => {
   submitButton.addEventListener('click', () => {
@@ -95,10 +98,7 @@ const checkFormBeforeSubmit = () => {
   });
 };
 
-/**
- * Сбрасывает значения полей в изначальное состояние
- *
- */
+/** Сбрасывает значения полей в изначальное состояние */
 const resetForm = () => {
   adForm.reset();
 };

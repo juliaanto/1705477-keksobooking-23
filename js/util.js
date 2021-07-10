@@ -1,6 +1,7 @@
 
 import {resetFilters} from './filters.js';
 import {resetForm} from './form.js';
+import { resetMainPin } from './map.js';
 
 
 const ALERT_SHOW_TIME = 5000;
@@ -37,6 +38,7 @@ const showAlert = (message) => {
 const resetPage = () => {
   resetForm();
   resetFilters();
+  resetMainPin();
 };
 
 export {showAlert, resetPage};
