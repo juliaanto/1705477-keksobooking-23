@@ -2,9 +2,6 @@ import {linkRoomNumberToCapacity, linkTypeToPrice} from './const.js';
 
 const adForm = document.querySelector('.ad-form');
 const formFieldset = adForm.querySelectorAll('fieldset');
-const mapFilters = document.querySelector('.map__filters');
-const mapFiltersSelect = mapFilters.querySelectorAll('select');
-const mapFiltersFieldset = mapFilters.querySelectorAll('fieldset');
 const capacityInput = adForm.querySelector('#capacity');
 const capacityOptions = capacityInput.querySelectorAll('option');
 const roomNumberInput = adForm.querySelector('#room_number');
@@ -15,27 +12,17 @@ const timeInInput = adForm.querySelector('#timein');
 const timeOutInput = adForm.querySelector('#timeout');
 const addressInput = adForm.querySelector('#address');
 
-/** Переводит страницу в неактивное состояние */
+/** Переводит форму в неактивное состояние */
 const disableForm = () => {
   adForm.classList.add('ad-form--disabled');
   formFieldset.forEach((element) => {element.setAttribute('disabled', 'disabled');
   });
-  mapFilters.classList.add('map__filters--disabled');
-  mapFiltersSelect.forEach((element) => {element.setAttribute('disabled', 'disabled');
-  });
-  mapFiltersFieldset.forEach((element) => {element.setAttribute('disabled', 'disabled');
-  });
 };
 
-/** Переводит страницу в активное состояние */
+/** Переводит форму в активное состояние */
 const enableForm = () => {
   adForm.classList.remove('ad-form--disabled');
   formFieldset.forEach((element) => {element.removeAttribute('disabled', 'disabled');
-  });
-  mapFilters.classList.remove('map__filters--disabled');
-  mapFiltersSelect.forEach((element) => {element.removeAttribute('disabled', 'disabled');
-  });
-  mapFiltersFieldset.forEach((element) => {element.removeAttribute('disabled', 'disabled');
   });
 };
 
