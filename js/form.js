@@ -1,6 +1,6 @@
 import {sendData} from './api.js';
 import {linkRoomNumberToCapacity, linkTypeToPrice} from './const.js';
-import { initialAddressString } from './map.js';
+import {initialAddressString} from './map.js';
 import {resetPage} from './util.js';
 
 const adForm = document.querySelector('.ad-form');

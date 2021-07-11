@@ -5,6 +5,7 @@ import { resetMainPin } from './map.js';
 
 
 const ALERT_SHOW_TIME = 5000;
+const successMessageTemplate = document.querySelector('#success').content.querySelector('.success');
 
 
 /**
@@ -35,10 +36,28 @@ const showAlert = (message) => {
   }, ALERT_SHOW_TIME);
 };
 
+const showSuccessMessage = () => {
+  const successMessage = successMessageTemplate.cloneNode(true);
+  document.body.appendChild(successMessage);
+};
+
+const removeSuccessMessage = () => {
+  document.querySelector('.success').remove();
+};
+
+const removeSuccessMessageOnEsc = (e) => {
+  if (e.code === 'Escape') {
+    removeSuccessMessage();
+  }
+};
+
 const resetPage = () => {
   resetForm();
   resetFilters();
   resetMainPin();
+  showSuccessMessage();
+  document.addEventListener('keydown', removeSuccessMessageOnEsc);
+  document.addEventListener('click', removeSuccessMessage);
 };
 
 export {showAlert, resetPage};
