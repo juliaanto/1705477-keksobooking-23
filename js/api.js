@@ -1,4 +1,4 @@
-import {showAlert} from './util.js';
+import {removeErrorMessage, removeErrorMessageOnEsc, showAlert, showErrorMessage} from './util.js';
 import {enableFilters} from './filters.js';
 
 
@@ -34,8 +34,15 @@ const sendData = (onSuccess, formData) => {
       if (response.ok) {
         onSuccess();
       } else {
-        console.log('Неуспешная отправка формы');
+        showErrorMessage();
+        document.addEventListener('keydown', removeErrorMessageOnEsc);
+        document.addEventListener('click', removeErrorMessage);
       }
+    })
+    .catch(() => {
+      showErrorMessage();
+      document.addEventListener('keydown', removeErrorMessageOnEsc);
+      document.addEventListener('click', removeErrorMessage);
     });
 };
 

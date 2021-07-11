@@ -6,7 +6,7 @@ import { resetMainPin } from './map.js';
 
 const ALERT_SHOW_TIME = 5000;
 const successMessageTemplate = document.querySelector('#success').content.querySelector('.success');
-
+const errorMessageTemplate = document.querySelector('#error').content.querySelector('.error');
 
 /**
  * Показывает сообщение об ошибке, отображается поверх фильтров
@@ -51,6 +51,21 @@ const removeSuccessMessageOnEsc = (e) => {
   }
 };
 
+const showErrorMessage = () => {
+  const errorMessage = errorMessageTemplate.cloneNode(true);
+  document.body.appendChild(errorMessage);
+};
+
+const removeErrorMessage = () => {
+  document.querySelector('.error').remove();
+};
+
+const removeErrorMessageOnEsc = (e) => {
+  if (e.code === 'Escape') {
+    removeErrorMessage();
+  }
+};
+
 const resetPage = () => {
   resetForm();
   resetFilters();
@@ -60,4 +75,4 @@ const resetPage = () => {
   document.addEventListener('click', removeSuccessMessage);
 };
 
-export {showAlert, resetPage};
+export {showAlert, resetPage, showErrorMessage, removeErrorMessage, removeErrorMessageOnEsc};
