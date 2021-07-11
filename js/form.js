@@ -1,7 +1,7 @@
 import {sendData} from './api.js';
 import {linkRoomNumberToCapacity, linkTypeToPrice} from './const.js';
 import {initialAddressString} from './map.js';
-import {resetPage} from './util.js';
+import {resetPage, resetPageAndShowMessage} from './util.js';
 
 const adForm = document.querySelector('.ad-form');
 const formFieldset = adForm.querySelectorAll('fieldset');
@@ -14,6 +14,7 @@ const priceInput = adForm.querySelector('#price');
 const timeInInput = adForm.querySelector('#timein');
 const timeOutInput = adForm.querySelector('#timeout');
 const addressInput = adForm.querySelector('#address');
+const resetButton = adForm.querySelector('.ad-form__reset');
 
 /** Переводит форму в неактивное состояние */
 const disableForm = () => {
@@ -103,12 +104,18 @@ const resetForm = () => {
   adForm.reset();
 };
 
+resetButton.addEventListener('click', (evt) => {
+  evt.preventDefault();
+
+  resetPage();
+});
+
 adForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
 
   const formData = new FormData(evt.target);
 
-  sendData(resetPage, formData);
+  sendData(resetPageAndShowMessage, formData);
 });
 
 export {disableForm, enableForm, checkFormBeforeSubmit, setAvailableCapacity, setAddress, resetForm};
