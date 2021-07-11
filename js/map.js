@@ -1,4 +1,4 @@
-import {enableForm, setAddress} from './ad-form.js';
+import {enableForm, setAddress} from './form.js';
 import {ADDRESS_DIGITS, initialAddress} from './const.js';
 import {renderCard} from './card.js';
 
@@ -39,7 +39,7 @@ mainPinMarker.addTo(map);
  * Преобразует координаты в строку
  *
  * @param {object} latLng - координаты (объект)
- * @return {string} - коррдинаты (строка)
+ * @return {string} - координаты (строка)
  */
 const getAddress = (latLng) => {
   const lat = latLng.lat.toFixed(ADDRESS_DIGITS);
@@ -48,13 +48,18 @@ const getAddress = (latLng) => {
   return `${lat}, ${lng}`;
 };
 
-setAddress(getAddress(initialAddress));
+const initialAddressString = getAddress(initialAddress);
 
 mainPinMarker.on('move', (evt) => {
   const latLng = evt.target.getLatLng();
 
   setAddress(getAddress(latLng));
 });
+
+/** Возвращает главную метку в исходное состояние */
+const resetMainPin = () => {
+  mainPinMarker.setLatLng(initialAddress);
+};
 
 const addPinsToMap = (announcements) => {
   announcements.forEach((announcement) => {
@@ -82,4 +87,4 @@ const addPinsToMap = (announcements) => {
   });
 };
 
-export {activateMap, addPinsToMap};
+export {activateMap, addPinsToMap, resetMainPin, initialAddressString};
