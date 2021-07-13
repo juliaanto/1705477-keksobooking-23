@@ -1,8 +1,8 @@
 import {removeErrorMessage, removeErrorMessageOnEsc, showAlert, showErrorMessage} from './util.js';
 import {enableFilters} from './filters.js';
 
-const similarAnnouncementsUrl = 'https://23.javascript.pages.academy/keksobooking/data';
-const submitFormUrl = 'https://23.javascript.pages.academy/keksobooking';
+const SIMILAR_ANNOUNCEMENTS_URL = 'https://23.javascript.pages.academy/keksobooking/data';
+const SUBMIT_FORM_URL = 'https://23.javascript.pages.academy/keksobooking';
 
 /**
  * Получает данные похожих объявлений с сервера
@@ -10,7 +10,7 @@ const submitFormUrl = 'https://23.javascript.pages.academy/keksobooking';
  * @param {function} onSuccess - колбэк, вызываемый в случае успешного выполнения запроса
  */
 const getData = (onSuccess) => {
-  fetch(similarAnnouncementsUrl)
+  fetch(SIMILAR_ANNOUNCEMENTS_URL)
     .then((response) => {
       if (response.ok) {
         return response.json();
@@ -21,12 +21,15 @@ const getData = (onSuccess) => {
     .then((announcements) => {
       onSuccess(announcements);
       enableFilters();
+    })
+    .catch(() => {
+      showAlert('Не удалось загрузить список похожих объявлений. Попробуйте перезагрузить страницу');
     });
 };
 
 const sendData = (onSuccess, formData) => {
   fetch(
-    submitFormUrl,
+    SUBMIT_FORM_URL,
     {
       method: 'POST',
       body: formData,
