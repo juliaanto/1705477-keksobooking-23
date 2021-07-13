@@ -1,6 +1,8 @@
 import {removeErrorMessage, removeErrorMessageOnEsc, showAlert, showErrorMessage} from './util.js';
 import {enableFilters} from './filters.js';
 
+const similarAnnouncementsUrl = 'https://23.javascript.pages.academy/keksobooking/data';
+const submitFormUrl = 'https://23.javascript.pages.academy/keksobooking';
 
 /**
  * Получает данные похожих объявлений с сервера
@@ -8,7 +10,7 @@ import {enableFilters} from './filters.js';
  * @param {function} onSuccess - колбэк, вызываемый в случае успешного выполнения запроса
  */
 const getData = (onSuccess) => {
-  fetch('https://23.javascript.pages.academy/keksobooking/data')
+  fetch(similarAnnouncementsUrl)
     .then((response) => {
       if (response.ok) {
         return response.json();
@@ -24,7 +26,7 @@ const getData = (onSuccess) => {
 
 const sendData = (onSuccess, formData) => {
   fetch(
-    'https://23.javascript.pages.academy/keksobooking',
+    submitFormUrl,
     {
       method: 'POST',
       body: formData,
