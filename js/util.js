@@ -36,21 +36,41 @@ const showAlert = (message) => {
   }, ALERT_SHOW_TIME);
 };
 
+/** Скрывает сообщение об успешной отправке формы */
+const successMessageAnywhereClickHandler = () => {
+  document.querySelector('.success').remove();
+  document.removeEventListener('click', successMessageAnywhereClickHandler);
+};
+
+/** Скрывает сообщение об успешной отправке формы при нажатии на клавишу Esc*/
+const successMessageEscapeKeydownHandler = (e) => {
+  if (e.code === 'Escape') {
+    successMessageAnywhereClickHandler();
+    document.removeEventListener('keydown', successMessageEscapeKeydownHandler);
+  }
+};
+
 /** Показывает сообщение об успешной отправке формы */
 const showSuccessMessage = () => {
   const successMessage = successMessageTemplate.cloneNode(true);
   document.body.appendChild(successMessage);
+  document.addEventListener('keydown', successMessageEscapeKeydownHandler);
+  document.addEventListener('click', successMessageAnywhereClickHandler);
 };
 
-/** Скрывает сообщение об успешной отправке формы */
-const removeSuccessMessage = () => {
-  document.querySelector('.success').remove();
+/** Скрывает сообщение о неуспешной отправке формы */
+const errorMessageAnywhereClickHandler = () => {
+  document.querySelector('.error').remove();
+  document.removeEventListener('click', errorMessageAnywhereClickHandler);
 };
 
-/** Скрывает сообщение об успешной отправке формы при нажатии на клавишу Esc*/
-const removeSuccessMessageOnEsc = (e) => {
+//anywhereClickHandler
+
+/** Скрывает сообщение о неуспешной отправке формы при нажатии на клавишу Esc*/
+const errorMessageEscapeKeydownHandler = (e) => {
   if (e.code === 'Escape') {
-    removeSuccessMessage();
+    errorMessageAnywhereClickHandler();
+    document.removeEventListener('keydown', errorMessageEscapeKeydownHandler);
   }
 };
 
@@ -58,18 +78,8 @@ const removeSuccessMessageOnEsc = (e) => {
 const showErrorMessage = () => {
   const errorMessage = errorMessageTemplate.cloneNode(true);
   document.body.appendChild(errorMessage);
-};
-
-/** Скрывает сообщение о неуспешной отправке формы */
-const removeErrorMessage = () => {
-  document.querySelector('.error').remove();
-};
-
-/** Скрывает сообщение о неуспешной отправке формы при нажатии на клавишу Esc*/
-const removeErrorMessageOnEsc = (e) => {
-  if (e.code === 'Escape') {
-    removeErrorMessage();
-  }
+  document.addEventListener('keydown', errorMessageEscapeKeydownHandler);
+  document.addEventListener('click', errorMessageAnywhereClickHandler);
 };
 
 /** Сбрасывает значения полей формы, фильтров, главной метки в изначальное состояние */
@@ -83,8 +93,6 @@ const resetPage = () => {
 const resetPageAndShowMessage = () => {
   resetPage();
   showSuccessMessage();
-  document.addEventListener('keydown', removeSuccessMessageOnEsc);
-  document.addEventListener('click', removeSuccessMessage);
 };
 
-export {showAlert, resetPage, resetPageAndShowMessage, showErrorMessage, removeErrorMessage, removeErrorMessageOnEsc};
+export {showAlert, resetPage, resetPageAndShowMessage, showErrorMessage};

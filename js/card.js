@@ -75,10 +75,10 @@ const getFeatures = (announcement, element) => {
     const modifiers = announcementFeatures.map((feature) => `popup__feature--${feature}`);
 
     featureList.querySelectorAll('.popup__feature')
-      .forEach((item) => {
-        const modifier = item.classList[1];
+      .forEach((featureElement) => {
+        const modifier = featureElement.classList[1];
         if (!modifiers.includes(modifier)) {
-          item.remove();
+          featureElement.remove();
         }
       });
   }

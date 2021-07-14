@@ -1,8 +1,6 @@
-import {disableForm} from './form.js';
-import {activateMap} from './map.js';
-import {checkFormBeforeSubmit, setAvailableCapacity} from './form.js';
+import {disableForm, checkFormBeforeSubmit, setAvailableCapacity} from './form.js';
+import {activateMap, addPinsToMap} from './map.js';
 import {getData} from './api.js';
-import {addPinsToMap} from './map.js';
 import {disableFilters} from './filters.js';
 
 const SIMILAR_ANNOUNCEMENTS = 10;

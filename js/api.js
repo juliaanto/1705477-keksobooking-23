@@ -1,4 +1,4 @@
-import {removeErrorMessage, removeErrorMessageOnEsc, showAlert, showErrorMessage} from './util.js';
+import {showAlert, showErrorMessage} from './util.js';
 import {enableFilters} from './filters.js';
 
 const SIMILAR_ANNOUNCEMENTS_URL = 'https://23.javascript.pages.academy/keksobooking/data';
@@ -40,14 +40,10 @@ const sendData = (onSuccess, formData) => {
         onSuccess();
       } else {
         showErrorMessage();
-        document.addEventListener('keydown', removeErrorMessageOnEsc);
-        document.addEventListener('click', removeErrorMessage);
       }
     })
     .catch(() => {
       showErrorMessage();
-      document.addEventListener('keydown', removeErrorMessageOnEsc);
-      document.addEventListener('click', removeErrorMessage);
     });
 };
 
