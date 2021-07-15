@@ -61,6 +61,8 @@ const resetMainPin = () => {
   mainPinMarker.setLatLng(initialAddress);
 };
 
+const markerGroup = L.layerGroup().addTo(map);
+
 const addPinsToMap = (announcements) => {
   announcements.forEach((announcement) => {
 
@@ -80,11 +82,15 @@ const addPinsToMap = (announcements) => {
       icon: pinIcon,
     });
     pinMarker
-      .addTo(map)
+      .addTo(markerGroup)
       .bindPopup(
         renderCard(announcement),
       );
   });
 };
 
-export {activateMap, addPinsToMap, resetMainPin, initialAddressString};
+const removePins = () => {
+  markerGroup.clearLayers();
+};
+
+export {activateMap, addPinsToMap, resetMainPin, initialAddressString, removePins};
