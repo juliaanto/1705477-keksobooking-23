@@ -5,6 +5,7 @@ const mapFilters = document.querySelector('.map__filters');
 const mapFiltersSelect = mapFilters.querySelectorAll('select');
 const mapFiltersFieldset = mapFilters.querySelectorAll('fieldset');
 const housingType = mapFilters.querySelector('#housing-type');
+const housingPrice = mapFilters.querySelector('#housing-price');
 
 /** Переводит фильтры в неактивное состояние */
 const disableFilters = () => {
@@ -29,12 +30,28 @@ const resetFilters = () => {
   mapFilters.reset();
 };
 
-/**
- * Фильтрует объявления по типу жилья
- *
- * @param {object} announcement - объявление
- */
-const filterByHousingType = (announcement) => housingType.value === 'any' || housingType.value === announcement.offer.type;
+const getHousingPrice= (price) => {
+
+  const priceInt = parseInt(price, 10);
+
+  if (priceInt < 10000) {
+    return 'low';
+  } else if (priceInt > 10000 && priceInt < 50000) {
+    return 'middle';
+  } else if (priceInt > 50000) {
+    return 'high';
+  } else {
+    return 'any';
+  }
+};
+
+const applyFilters = (announcement) => {
+
+  const isHousingType = housingType.value === 'any' || housingType.value === announcement.offer.type;
+  const isHousingPrice = housingPrice.value === 'any' || housingPrice.value === getHousingPrice(announcement.offer.price);
+
+  return isHousingType && isHousingPrice;
+};
 
 /**
  * Добавляет на карту отфильтрованные метки объявлений
@@ -43,7 +60,7 @@ const filterByHousingType = (announcement) => housingType.value === 'any' || hou
  */
 const filterAndAddPinsToMap = (announcements) => {
   const originAnnouncements = announcements.slice();
-  const filteredPins = originAnnouncements.filter(filterByHousingType);
+  const filteredPins = originAnnouncements.filter(applyFilters);
   addPinsToMap(filteredPins.slice(0, SIMILAR_ANNOUNCEMENTS));
 };
 
@@ -54,7 +71,7 @@ const filterAndAddPinsToMap = (announcements) => {
  */
 const initHousingTypeChange = (announcements) => {
 
-  housingType.addEventListener('change', () => {
+  mapFilters.addEventListener('change', () => {
     removePins();
     filterAndAddPinsToMap(announcements);
   });
