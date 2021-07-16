@@ -1,6 +1,8 @@
 import {SIMILAR_ANNOUNCEMENTS} from './const.js';
 import {addPinsToMap, removePins} from './map.js';
+import {debounce} from './utils/debounce.js';
 
+const RERENDER_DELAY = 500;
 const mapFilters = document.querySelector('.map__filters');
 const mapFiltersSelect = mapFilters.querySelectorAll('select');
 const mapFiltersFieldset = mapFilters.querySelectorAll('fieldset');
@@ -106,10 +108,13 @@ const filterAndAddPinsToMap = (announcements) => {
  */
 const initHousingTypeChange = (announcements) => {
 
-  mapFilters.addEventListener('change', () => {
-    removePins();
-    filterAndAddPinsToMap(announcements);
-  });
+  mapFilters.addEventListener('change', (debounce(
+    () => {
+      removePins();
+      filterAndAddPinsToMap(announcements);
+    },
+    RERENDER_DELAY,
+  )));
 };
 
 export {disableFilters, enableFilters, resetFilters, filterAndAddPinsToMap, initHousingTypeChange};
