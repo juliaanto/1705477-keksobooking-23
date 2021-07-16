@@ -6,6 +6,7 @@ const mapFiltersSelect = mapFilters.querySelectorAll('select');
 const mapFiltersFieldset = mapFilters.querySelectorAll('fieldset');
 const housingType = mapFilters.querySelector('#housing-type');
 const housingPrice = mapFilters.querySelector('#housing-price');
+const housingRooms = mapFilters.querySelector('#housing-rooms');
 
 /** Переводит фильтры в неактивное состояние */
 const disableFilters = () => {
@@ -49,8 +50,9 @@ const applyFilters = (announcement) => {
 
   const isHousingType = housingType.value === 'any' || housingType.value === announcement.offer.type;
   const isHousingPrice = housingPrice.value === 'any' || housingPrice.value === getHousingPrice(announcement.offer.price);
+  const isHousingRooms = housingRooms.value === 'any' || housingRooms.value === String(announcement.offer.rooms);
 
-  return isHousingType && isHousingPrice;
+  return isHousingType && isHousingPrice && isHousingRooms;
 };
 
 /**
