@@ -7,6 +7,7 @@ const mapFiltersFieldset = mapFilters.querySelectorAll('fieldset');
 const housingType = mapFilters.querySelector('#housing-type');
 const housingPrice = mapFilters.querySelector('#housing-price');
 const housingRooms = mapFilters.querySelector('#housing-rooms');
+const housingGuests = mapFilters.querySelector('#housing-guests');
 
 /** Переводит фильтры в неактивное состояние */
 const disableFilters = () => {
@@ -31,7 +32,7 @@ const resetFilters = () => {
   mapFilters.reset();
 };
 
-const getHousingPrice= (price) => {
+const getHousingPrice = (price) => {
 
   const priceInt = parseInt(price, 10);
 
@@ -46,13 +47,23 @@ const getHousingPrice= (price) => {
   }
 };
 
+const getHousingGuests = (guests) => {
+
+  if (guests === 1 || guests === 2) {
+    return String(guests);
+  } else {
+    return '0';
+  }
+};
+
 const applyFilters = (announcement) => {
 
   const isHousingType = housingType.value === 'any' || housingType.value === announcement.offer.type;
   const isHousingPrice = housingPrice.value === 'any' || housingPrice.value === getHousingPrice(announcement.offer.price);
   const isHousingRooms = housingRooms.value === 'any' || housingRooms.value === String(announcement.offer.rooms);
+  const ishousingGuests = housingGuests.value === 'any' || housingGuests.value === getHousingGuests(announcement.offer.guests);
 
-  return isHousingType && isHousingPrice && isHousingRooms;
+  return isHousingType && isHousingPrice && isHousingRooms && ishousingGuests;
 };
 
 /**
