@@ -2,6 +2,7 @@ import {enableForm, setAddress} from './form.js';
 import {ADDRESS_DIGITS, initialAddress} from './const.js';
 import {renderCard} from './card.js';
 
+const ZOOM = 12;
 const map = L.map('map-canvas');
 
 const activateMap = () => {
@@ -9,7 +10,7 @@ const activateMap = () => {
     .on('load', () => {
       enableForm();
     })
-    .setView(initialAddress, 12);
+    .setView(initialAddress, ZOOM);
 
   L.tileLayer(
     'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -61,6 +62,8 @@ const resetMainPin = () => {
   mainPinMarker.setLatLng(initialAddress);
 };
 
+const markerGroup = L.layerGroup().addTo(map);
+
 const addPinsToMap = (announcements) => {
   announcements.forEach((announcement) => {
 
@@ -80,11 +83,15 @@ const addPinsToMap = (announcements) => {
       icon: pinIcon,
     });
     pinMarker
-      .addTo(map)
+      .addTo(markerGroup)
       .bindPopup(
         renderCard(announcement),
       );
   });
 };
 
-export {activateMap, addPinsToMap, resetMainPin, initialAddressString};
+const removePins = () => {
+  markerGroup.clearLayers();
+};
+
+export {activateMap, addPinsToMap, resetMainPin, initialAddressString, removePins};

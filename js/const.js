@@ -28,4 +28,6 @@ const initialAddress = {
   lng: 139.753891,
 };
 
-export {offerType, linkRoomNumberToCapacity, linkTypeToPrice, ADDRESS_DIGITS, initialAddress};
+const SIMILAR_ANNOUNCEMENTS = 10;
+
+export {offerType, linkRoomNumberToCapacity, linkTypeToPrice, ADDRESS_DIGITS, initialAddress, SIMILAR_ANNOUNCEMENTS};

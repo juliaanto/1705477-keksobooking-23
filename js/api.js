@@ -1,6 +1,8 @@
-import {removeErrorMessage, removeErrorMessageOnEsc, showAlert, showErrorMessage} from './util.js';
+import {showAlert, showErrorMessage} from './util.js';
 import {enableFilters} from './filters.js';
 
+const SIMILAR_ANNOUNCEMENTS_URL = 'https://23.javascript.pages.academy/keksobooking/data';
+const SUBMIT_FORM_URL = 'https://23.javascript.pages.academy/keksobooking';
 
 /**
  * Получает данные похожих объявлений с сервера
@@ -8,7 +10,7 @@ import {enableFilters} from './filters.js';
  * @param {function} onSuccess - колбэк, вызываемый в случае успешного выполнения запроса
  */
 const getData = (onSuccess) => {
-  fetch('https://23.javascript.pages.academy/keksobooking/data')
+  fetch(SIMILAR_ANNOUNCEMENTS_URL)
     .then((response) => {
       if (response.ok) {
         return response.json();
@@ -19,12 +21,15 @@ const getData = (onSuccess) => {
     .then((announcements) => {
       onSuccess(announcements);
       enableFilters();
+    })
+    .catch(() => {
+      showAlert('Не удалось загрузить список похожих объявлений. Попробуйте перезагрузить страницу');
     });
 };
 
 const sendData = (onSuccess, formData) => {
   fetch(
-    'https://23.javascript.pages.academy/keksobooking',
+    SUBMIT_FORM_URL,
     {
       method: 'POST',
       body: formData,
@@ -35,14 +40,10 @@ const sendData = (onSuccess, formData) => {
         onSuccess();
       } else {
         showErrorMessage();
-        document.addEventListener('keydown', removeErrorMessageOnEsc);
-        document.addEventListener('click', removeErrorMessage);
       }
     })
     .catch(() => {
       showErrorMessage();
-      document.addEventListener('keydown', removeErrorMessageOnEsc);
-      document.addEventListener('click', removeErrorMessage);
     });
 };
 

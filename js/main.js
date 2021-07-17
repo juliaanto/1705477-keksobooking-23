@@ -1,17 +1,14 @@
-import {disableForm} from './form.js';
+import {disableForm, checkFormBeforeSubmit, setAvailableCapacity} from './form.js';
 import {activateMap} from './map.js';
-import {checkFormBeforeSubmit, setAvailableCapacity} from './form.js';
 import {getData} from './api.js';
-import {addPinsToMap} from './map.js';
-import {disableFilters} from './filters.js';
-
-const SIMILAR_ANNOUNCEMENTS = 10;
+import {disableFilters, filterAndAddPinsToMap, initHousingTypeChange} from './filters.js';
 
 disableFilters();
 disableForm();
 activateMap();
 getData((announcements) => {
-  addPinsToMap(announcements.slice(0, SIMILAR_ANNOUNCEMENTS));
+  filterAndAddPinsToMap(announcements);
+  initHousingTypeChange(announcements);
 });
 checkFormBeforeSubmit();
 setAvailableCapacity();

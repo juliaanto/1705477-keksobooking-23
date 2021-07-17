@@ -36,7 +36,8 @@ const renderCardBlocks = (announcement, element) => {
   if (announcement.offer.price === undefined) {
     element.querySelector('.popup__text--price').remove();
   } else {
-    element.querySelector('.popup__text--price').textContent = announcement.offer.price += ' ₽/ночь';
+    let announcementPrice = parseInt(announcement.offer.price, 10);
+    element.querySelector('.popup__text--price').textContent = announcementPrice += ' ₽/ночь';
   }
 
   if (announcement.offer.rooms === undefined || announcement.offer.guests === undefined) {
@@ -75,10 +76,10 @@ const getFeatures = (announcement, element) => {
     const modifiers = announcementFeatures.map((feature) => `popup__feature--${feature}`);
 
     featureList.querySelectorAll('.popup__feature')
-      .forEach((item) => {
-        const modifier = item.classList[1];
+      .forEach((featureElement) => {
+        const modifier = featureElement.classList[1];
         if (!modifiers.includes(modifier)) {
-          item.remove();
+          featureElement.remove();
         }
       });
   }
