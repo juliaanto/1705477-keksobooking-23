@@ -4,7 +4,7 @@ import {resetMainPin} from './map.js';
 
 
 const ALERT_SHOW_TIME = 5000;
-const escapeButton = 'Escape';
+const ESCAPE_BUTTON = 'Escape';
 const successMessageTemplate = document.querySelector('#success').content.querySelector('.success');
 const errorMessageTemplate = document.querySelector('#error').content.querySelector('.error');
 
@@ -44,7 +44,7 @@ const successMessageAnywhereClickHandler = () => {
 
 /** Скрывает сообщение об успешной отправке формы при нажатии на клавишу Esc*/
 const successMessageEscapeKeydownHandler = (e) => {
-  if (e.code === escapeButton) {
+  if (e.code === ESCAPE_BUTTON) {
     successMessageAnywhereClickHandler();
     document.removeEventListener('keydown', successMessageEscapeKeydownHandler);
   }
@@ -68,7 +68,7 @@ const errorMessageAnywhereClickHandler = () => {
 
 /** Скрывает сообщение о неуспешной отправке формы при нажатии на клавишу Esc*/
 const errorMessageEscapeKeydownHandler = (e) => {
-  if (e.code === escapeButton) {
+  if (e.code === ESCAPE_BUTTON) {
     errorMessageAnywhereClickHandler();
     document.removeEventListener('keydown', errorMessageEscapeKeydownHandler);
   }
