@@ -151,7 +151,12 @@ const checkFormBeforeSubmit = () => {
 const resetForm = () => {
   adForm.reset();
   avatarPreview.src = initialAvatarPreview;
-  housingPreviewArea.querySelector('img').remove();
+
+  const housingPreviewElement = housingPreviewArea.querySelector('img');
+
+  if (housingPreviewElement) {
+    housingPreviewElement.remove();
+  }
 };
 
 resetButton.addEventListener('click', (evt) => {
