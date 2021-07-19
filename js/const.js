@@ -35,8 +35,15 @@ const priceFilter = {
   high: 50000,
 };
 
+const priceFilterValues = {
+  low: 'low',
+  middle: 'middle',
+  high: 'high',
+  any: 'any',
+};
+
 const FIRST_VALUE_GUESTS_FILTER = 1;
 
 const SECOND_VALUE_GUESTS_FILTER = 2;
 
-export {offerType, linkRoomNumberToCapacity, linkTypeToPrice, ADDRESS_DIGITS, initialAddress, SIMILAR_ANNOUNCEMENTS, priceFilter, FIRST_VALUE_GUESTS_FILTER, SECOND_VALUE_GUESTS_FILTER};
+export {offerType, linkRoomNumberToCapacity, linkTypeToPrice, ADDRESS_DIGITS, initialAddress, SIMILAR_ANNOUNCEMENTS, priceFilter, priceFilterValues, FIRST_VALUE_GUESTS_FILTER, SECOND_VALUE_GUESTS_FILTER};

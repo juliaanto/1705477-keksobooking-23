@@ -1,4 +1,4 @@
-import {FIRST_VALUE_GUESTS_FILTER, priceFilter, SECOND_VALUE_GUESTS_FILTER, SIMILAR_ANNOUNCEMENTS} from './const.js';
+import {FIRST_VALUE_GUESTS_FILTER, priceFilter, priceFilterValues, SECOND_VALUE_GUESTS_FILTER, SIMILAR_ANNOUNCEMENTS} from './const.js';
 import {addPinsToMap, removePins} from './map.js';
 import {debounce} from './utils/debounce.js';
 
@@ -41,13 +41,13 @@ const getHousingPrice = (price) => {
   const priceInt = parseInt(price, 10);
 
   if (priceInt < priceFilter.low) {
-    return 'low';
+    return priceFilterValues.low;
   } else if (priceInt > priceFilter.low && priceInt < priceFilter.high) {
-    return 'middle';
+    return priceFilterValues.middle;
   } else if (priceInt > priceFilter.high) {
-    return 'high';
+    return priceFilterValues.high;
   } else {
-    return 'any';
+    return priceFilterValues.any;
   }
 };
 
