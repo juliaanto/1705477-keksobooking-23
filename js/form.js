@@ -22,6 +22,7 @@ const initialAvatarPreview = avatarPreview.src;
 const housingChooser = adForm.querySelector('#images');
 const housingPreviewArea = adForm.querySelector('.ad-form__photo');
 const HOUSING_PREVIEW_SIZE = 40;
+const HOUSING_PREVIEW_ALT = 'Фотография жилья';
 
 /** Переводит форму в неактивное состояние */
 const disableForm = () => {
@@ -123,7 +124,7 @@ housingChooser.addEventListener('change', () => {
   const housingPreview = document.createElement('img');
   housingPreview.setAttribute('width', HOUSING_PREVIEW_SIZE);
   housingPreview.setAttribute('height', HOUSING_PREVIEW_SIZE);
-  housingPreview.setAttribute('alt', 'Фотография жилья');
+  housingPreview.setAttribute('alt', HOUSING_PREVIEW_ALT);
   housingPreviewArea.setAttribute('style', 'padding: 15px');
 
   if (matches) {
