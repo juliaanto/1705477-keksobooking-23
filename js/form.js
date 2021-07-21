@@ -3,6 +3,7 @@ import {linkRoomNumberToCapacity, linkTypeToPrice} from './const.js';
 import {initialAddressString} from './map.js';
 import {resetPage, resetPageAndShowMessage} from './util.js';
 
+const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 const adForm = document.querySelector('.ad-form');
 const formFieldset = adForm.querySelectorAll('fieldset');
 const capacityInput = adForm.querySelector('#capacity');
@@ -15,6 +16,12 @@ const timeInInput = adForm.querySelector('#timein');
 const timeOutInput = adForm.querySelector('#timeout');
 const addressInput = adForm.querySelector('#address');
 const resetButton = adForm.querySelector('.ad-form__reset');
+const avatarChooser = adForm.querySelector('#avatar');
+const avatarPreview = adForm.querySelector('.ad-form-header__preview img');
+const initialAvatarPreview = avatarPreview.src;
+const housingChooser = adForm.querySelector('#images');
+const housingPreviewArea = adForm.querySelector('.ad-form__photo');
+const HOUSING_PREVIEW_SIZE = 40;
 
 /** Переводит форму в неактивное состояние */
 const disableForm = () => {
@@ -90,6 +97,48 @@ const setAddress = (addressValue) => {
   addressInput.value = addressValue;
 };
 
+avatarChooser.addEventListener('change', () => {
+  const file = avatarChooser.files[0];
+  const fileName = file.name.toLowerCase();
+
+  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+
+  if (matches) {
+    const reader = new FileReader();
+
+    reader.addEventListener('load', () => {
+      avatarPreview.src = reader.result;
+    });
+
+    reader.readAsDataURL(file);
+  }
+});
+
+housingChooser.addEventListener('change', () => {
+  const file = housingChooser.files[0];
+  const fileName = file.name.toLowerCase();
+
+  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+
+  const housingPreview = document.createElement('img');
+  housingPreview.setAttribute('width', HOUSING_PREVIEW_SIZE);
+  housingPreview.setAttribute('height', HOUSING_PREVIEW_SIZE);
+  housingPreview.setAttribute('alt', 'Фотография жилья');
+  housingPreviewArea.setAttribute('style', 'padding: 15px');
+
+  if (matches) {
+    const reader = new FileReader();
+
+    reader.addEventListener('load', () => {
+      housingPreview.src = reader.result;
+    });
+
+    reader.readAsDataURL(file);
+  }
+
+  housingPreviewArea.appendChild(housingPreview);
+});
+
 setAddress(initialAddressString);
 
 /** Проверяет корректность формы перед отправкой */
@@ -102,6 +151,13 @@ const checkFormBeforeSubmit = () => {
 /** Сбрасывает значения полей в изначальное состояние */
 const resetForm = () => {
   adForm.reset();
+  avatarPreview.src = initialAvatarPreview;
+
+  const housingPreviewElement = housingPreviewArea.querySelector('img');
+
+  if (housingPreviewElement) {
+    housingPreviewElement.remove();
+  }
 };
 
 resetButton.addEventListener('click', (evt) => {
