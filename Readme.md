@@ -1,51 +1,31 @@
-# Личный проект «Кексобукинг»
+# Keksobooking
+Keksobooking is a service for placing ads for renting real estate in the center of Tokyo. You can post ads about your property or view already posted ads.
 
-* Студент: [Юлия Антонова](https://up.htmlacademy.ru/javascript/23/user/1705477).
-* Наставник: [Антон Попов](https://htmlacademy.ru/profile/joker).
 
----
+## General Information
+Keksobooking is an educational project implemented while studying at a professional online course [JavaScript. Professional development of web interfaces](https://htmlacademy.ru/intensive/javascript) from [HTML Academy](https://htmlacademy.ru/).
 
-_Не удаляйте и не изменяйте самовольно файлы и папки:_
-_`.editorconfig`, `.eslintrc`, `.gitattributes`, `.gitignore`, `package-lock.json`, `package.json`., `.github`_
+After filling in all the data and publishing the ad, all data from the form is sent using an AJAX request to the [https://23.javascript.pages.academy/keksobooking](https://23.javascript.pages.academy/keksobooking) server using the POST method with the multipart/form-data type.
 
----
 
-[Как работать с Git на проекте](Contributing.md) | [Как работать над проектом](Workflow.md)
+## Technologies Used
+- JavaScript
+- Leaflet
 
-### Памятка
 
-#### 1. Зарегистрируйтесь на Гитхабе
+## Сomposition
+- Ad filtering
+- Form validation and submission
+- Showing posted ads
 
-Если у вас ещё нет аккаунта на [github.com](https://github.com/join), скорее зарегистрируйтесь.
 
-#### 2. Создайте форк
-
-Откройте репозиторий и нажмите кнопку «Fork» в правом верхнем углу. Репозиторий из Академии будет скопирован в ваш аккаунт.
-
-<img width="769" alt="" src="https://user-images.githubusercontent.com/10909/35275195-078bb816-0050-11e8-8708-89266d2fae5d.png">
-
-Получится вот так:
-
-<img width="769" alt="" src="https://user-images.githubusercontent.com/10909/35275196-07baf78e-0050-11e8-9275-404a4b63efb1.png">
-
-#### 3. Клонируйте репозиторий на свой компьютер
-
-Будьте внимательны: нужно клонировать свой репозиторий (форк), а не репозиторий Академии. Также обратите внимание, что клонировать репозиторий нужно через SSH, а не через HTTPS. Нажмите зелёную кнопку в правой части экрана, чтобы скопировать SSH-адрес вашего репозитория:
-
-<img width="769" alt="" src="https://user-images.githubusercontent.com/10909/35275197-07d8e79e-0050-11e8-95c1-a30a433687d8.png">
-
-Клонировать репозиторий можно так:
+## How to run
+To clone and run this application:
 
 ```
-git clone SSH-адрес_вашего_форка
+git clone https://github.com/juliaanto/1705477-keksobooking-23.git
+cd 1705477-keksobooking-23/
+npm install
+npm start
 ```
-
-Команда клонирует репозиторий на ваш компьютер и подготовит всё необходимое для старта работы.
-
-#### 4. Начинайте обучение!
-
----
-
-<a href="https://htmlacademy.ru/intensive/javascript"><img align="left" width="50" height="50" alt="HTML Academy" src="https://up.htmlacademy.ru/static/img/intensive/javascript/logo-for-github-2.png"></a>
-
-Репозиторий создан для обучения на интенсивном онлайн‑курсе «[JavaScript. Профессиональная разработка веб-интерфейсов](https://htmlacademy.ru/intensive/javascript)» от [HTML Academy](https://htmlacademy.ru).
+The application will be available at [localhost:3000](http://localhost:3000).
